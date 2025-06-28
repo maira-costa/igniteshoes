@@ -26,6 +26,7 @@
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="com.mairacosta.igniteshoes"/>
         <data android:scheme="exp+igniteshoes"/>
+        <data android:scheme="igniteshoes"/>
       </intent-filter>
     </activity>
   </application>

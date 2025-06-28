@@ -1,27 +1,40 @@
 import { HStack, Text, IconButton, CloseIcon, Icon, Pressable, useNativeBase } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import { OSNotification } from 'react-native-onesignal';
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
+import * as Linking from 'expo-linking'; // npx expo install expo-linking em https://reactnavigation.org/docs/deep-linking/
 
 type Props = {
   data: OSNotification;
   onClose: () => void;
 }
 
-type AdditionalDataProps = {
-  route?: string;
-  product_id?: string;
-}
+// type AdditionalDataProps = {
+//   route?: string;
+//   product_id?: string;
+// }
 
 export function Notification({ data, onClose }: Props) {
-  const { navigate } = useNavigation()
+  // const { navigate } = useNavigation()
 
   function handleOnPress() {
-    const { route, product_id } = data.additionalData as AdditionalDataProps
+    /*
+      Abrir tela específica enviando a rota via parâmetro no onesignal:
 
-    if(route === "details" && product_id) {
-      navigate("details", {productId: product_id})
+      const { route, product_id } = data.additionalData as AdditionalDataProps
+
+      if(route === "details" && product_id) {
+        navigate("details", {productId: product_id})
+      }
+    */
+
+    // Abrir a tela via deeplink
+    if(data.launchURL) {
+      Linking.openURL(data.launchURL);
+      onClose();
     }
+    
+    
 
   }
 
